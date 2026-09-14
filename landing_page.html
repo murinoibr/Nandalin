@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name= "viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nandalin - Produtos Premium</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* ========================================
+           RESET & BASE
+           ======================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --gold: #C9A962;
+            --gold-light: #E8D5A3;
+            --gold-dark: #A68B4B;
+            --black: #0A0A0A;
+            --dark: #1A1A1A;
+            --dark-gray: #2A2A2A;
+            --gray: #888888;
+            --light-gray: #F5F5F5;
+            --white: #FFFFFF;
+            --font-display: 'Playfair Display', serif;
+            --font-body: 'Inter', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        
+        body {
+            font-family: var(--font-body);
+            background-color: var(--black);
+            color: var(--white);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* ========================================
+           NAVIGATION
+           ======================================== */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(180deg, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0) 100%);
+            transition: all 0.3s ease;
+        }
+
+        .nav.scrolled {
+            background: rgba(10,10,10,0.98);
+            backdrop-filter: blur(20px);
+            padding: 1rem 5%;
+        }
+
+        .logo {
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--gold);
+            text-decoration: none;
+            letter-spacing: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        .nav-cta {
+            background: var(--gold);
+            color: var(--black) !important;
+            padding: 0.75rem 1.5rem;
+            border-radius: 2px;
+            font-weight: 600 !important;
+        }
+
+        .nav-cta:hover {
+            background: var(--gold-light) !important;
+            color: var(--black) !important;
+        }
+
+        /* ========================================
+           HERO SECTION
+           ======================================== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 120px 5% 80px;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at center, rgba(201,169,98,0.1) 0%, transparent 70%);
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            max-width: 900px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            border: 1px solid var(--gold);
+            padding: 0.5rem 1.5rem;
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 2rem;
+        }
+
+        .hero-title {
+            font-family: var(--font-display);
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            font-weight: 600;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-title span {
+            color: var(--gold);
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            font-weight: 300;
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            line-height: 1.8;
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            background: var(--gold);
+            color: var(--black);
+            padding: 1.2rem 3rem;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            border: 2px solid var(--gold);
+        }
+
+        .hero-cta:hover {
+            background: transparent;
+            color: var(--gold);
+        }
+
+        .hero-cta-outline {
+            background: transparent;
+            color: var(--gold);
+        }
+
+        .hero-cta-outline:hover {
+            background: var(--gold);
+            color: var(--black);
+        }
+
+        /* ========================================
+           VIDEO SECTION
+           ======================================== */
+        .video-section {
+            padding: 100px 5%;
+            background: var(--dark);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-label {
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .section-desc {
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
+            font-weight: 300;
+        }
+
+        .video-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 50px 100px rgba(0,0,0,0.5);
+        }
+
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            background: var(--dark-gray);
+        }
+
+        .video-wrapper iframe,
+        .video-wrapper video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .video-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .video-overlay:hover {
+            background: rgba(0,0,0,0.2);
+        }
+
+        .play-btn {
+            width: 80px;
+            height: 80px;
+            border: 2px solid var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .play-btn::after {
+            content: '';
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 12px 0 12px 22px;
+            border-color: transparent transparent transparent var(--gold);
+            margin-left: 4px;
+        }
+
+        .play-btn:hover {
+            background: var(--gold);
+            transform: scale(1.1);
+        }
+
+        .play-btn:hover::after {
+            border-color: transparent transparent transparent var(--black);
+        }
+
+        .video-gdrive {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .video-gdrive a {
+            color: var(--gold);
+            text-decoration: none;
+            font-size: 0.9rem;
+            border-bottom: 1px solid var(--gold-dark);
+            transition: all 0.3s ease;
+        }
+
+        .video-gdrive a:hover {
+            color: var(--gold-light);
+            border-color: var(--gold-light);
+        }
+
+        /* ========================================
+           PRODUCTS SECTION
+           ======================================== */
+        .products-section {
+            padding: 100px 5%;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .product-card {
+            background: var(--dark);
+            border: 1px solid rgba(201,169,98,0.2);
+            padding: 2.5rem;
+            text-align: center;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gold);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .product-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .product-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-5px);
+        }
+
+        .product-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .product-name {
+            font-family: var(--font-display);
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+        }
+
+        .product-desc {
+            color: var(--gray);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .product-price {
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+        }
+
+        .product-price .original {
+            font-size: 1rem;
+            color: var(--gray);
+            text-decoration: line-through;
+            margin-right: 0.5rem;
+        }
+
+        .product-btn {
+            display: inline-block;
+            width: 100%;
+            padding: 1rem;
+            background: var(--gold);
+            color: var(--black);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+
+        .product-btn:hover {
+            background: var(--gold-light);
+        }
+
+        .product-tag {
+            position: absolute;
+            top: 1.5rem;
+            right: -2rem;
+            background: var(--gold);
+            color: var(--black);
+            padding: 0.3rem 2.5rem;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transform: rotate(45deg);
+        }
+
+        /* ========================================
+           FEATURES SECTION
+           ======================================== */
+        .features-section {
+            padding: 100px 5%;
+            background: var(--dark);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .feature {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            border: 1px solid var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .feature-title {
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .feature-desc {
+            color: var(--gray);
+            font-size: 0.9rem;
+            font-weight: 300;
+        }
+
+        /* ========================================
+           TESTIMONIALS
+           ======================================== */
+        .testimonials-section {
+            padding: 100px 5%;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .testimonial {
+            background: var(--dark);
+            border: 1px solid rgba(201,169,98,0.15);
+            padding: 2.5rem;
+            position: relative;
+        }
+
+        .testimonial::before {
+            content: '"';
+            font-family: var(--font-display);
+            font-size: 4rem;
+            color: var(--gold);
+            opacity: 0.3;
+            position: absolute;
+            top: 1rem;
+            left: 2rem;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            color: var(--light-gray);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .testimonial-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: var(--black);
+        }
+
+        .testimonial-name {
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .testimonial-role {
+            font-size: 0.8rem;
+            color: var(--gray);
+        }
+
+        /* ========================================
+           CTA SECTION
+           ======================================== */
+        .cta-section {
+            padding: 120px 5%;
+            text-align: center;
+            background: radial-gradient(ellipse at center, rgba(201,169,98,0.15) 0%, transparent 70%);
+        }
+
+        .cta-title {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-desc {
+            color: var(--gray);
+            font-size: 1.1rem;
+            max-width: 500px;
+            margin: 0 auto 3rem;
+            font-weight: 300;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1.2rem 3rem;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            border: 2px solid var(--gold);
+        }
+
+        .cta-btn-primary {
+            background: var(--gold);
+            color: var(--black);
+        }
+
+        .cta-btn-primary:hover {
+            background: var(--gold-light);
+            border-color: var(--gold-light);
+        }
+
+        .cta-btn-secondary {
+            background: transparent;
+            color: var(--gold);
+        }
+
+        .cta-btn-secondary:hover {
+            background: var(--gold);
+            color: var(--black);
+        }
+
+        /* ========================================
+           FOOTER
+           ======================================== */
+        .footer {
+            padding: 60px 5% 30px;
+            border-top: 1px solid rgba(201,169,98,0.15);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            color: var(--gold);
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .footer-links a {
+            color: var(--gray);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--gold);
+        }
+
+        .footer-copy {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            color: var(--gray);
+            font-size: 0.8rem;
+        }
+
+        /* ========================================
+           ANIMATIONS
+           ======================================== */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ========================================
+           RESPONSIVE
+           ======================================== */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        /* ========================================
+           MOBILE MENU
+           ======================================== */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 2px;
+            background: var(--white);
+            transition: all 0.3s ease;
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVIGATION -->
+    <nav class="nav" id="navbar">
+        <a href="#" class="logo">NANDALIN</a>
+        <ul class="nav-links">
+            <li><a href="#produtos">Produtos</a></li>
+            <li><a href="#videos">Vídeos</a></li>
+            <li><a href="#diferenciais">Diferenciais</a></li>
+            <li><a href="#depoimentos">Clientes</a></li>
+            <li><a href="#comprar" class="nav-cta">Comprar Agora</a></li>
+        </ul>
+        <button class="menu-toggle" id="menuToggle" aria-label="Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <div class="hero-badge">✦ Exclusividade Premium ✦</div>
+            <h1 class="hero-title">
+                Qualidade que <span>se vê</span>.<br>
+                Excelência que <span>se sente</span>.
+            </h1>
+            <p class="hero-subtitle">
+                Produtos selecionados para quem não aceita menos que o extraordinário. Cada peça é uma declaração de estilo e sofisticação.
+            </p>
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <a href="#produtos" class="hero-cta">Ver Coleção</a>
+                <a href="#videos" class="hero-cta hero-cta-outline">Assistir Vídeo</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- VIDEO SECTION -->
+    <section class="video-section" id="videos">
+        <div class="section-header fade-in">
+            <p class="section-label">◆ Apresentação ◆</p>
+            <h2 class="section-title">Conheça Nossa Coleção</h2>
+            <p class="section-desc">
+                Assista ao vídeo exclusivo e descubra por que somos a escolha de quem não se contenta com menos.
+            </p>
+        </div>
+        <div class="video-container fade-in">
+            <div class="video-wrapper">
+                <!-- Substitua pelo link do Google Drive ou embed -->
+                <div class="video-overlay" id="videoOverlay">
+                    <div class="play-btn"></div>
+                </div>
+                <!-- Para usar vídeo do Google Drive, substitua LINK_AQUI pelo link de compartilhamento:
+                     iframe src="https://drive.google.com/file/d/SEU_ID_AQUI/preview" -->
+                <video id="mainVideo" controls style="display:none;" preload="none">
+                    <source src="video_story_perfeito.mp4" type="video/mp4">
+                    Seu navegador não suporta vídeos.
+                </video>
+            </div>
+        </div>
+        <div class="video-gdrive fade-in">
+            <p style="color: var(--gray); margin-bottom: 0.5rem;">🔗 Prefere assistir no Google Drive?</p>
+            <a href="https://drive.google.com/drive/folders/1f2xZSV4YjFIrYHw8I89NNUcS6GpO0V_e" target="_blank" rel="noopener">Assistir no Google Drive →</a>
+        </div>
+    </section>
+
+    <!-- PRODUCTS SECTION -->
+    <section class="products-section" id="produtos">
+        <div class="section-header fade-in">
+            <p class="section-label">◆ Coleção ◆</p>
+            <h2 class="section-title">Produtos em Destaque</h2>
+git@github.com:diegosouzapw/OmniRoute.git<p class="section-desc">
+                Edições limitadas, acabamento impecável, experiências que transformam seu padrão.
+            </p>
+        </div>
+        <div class="products-grid">
+            <!-- Produto 1 -->
+            <div class="product-card fade-in">
+                <div class="product-tag">Mais Vendido</div>
+                <div class="product-icon">✦</div>
+                <h3 class="product-name">Coleção Signature</h3>
+                <p class="product-desc">
+                    Nossa linha principal. Design exclusivo, materiais premium e acabamento artesanal que só quem entende reconhece.
+                </p>
+                <div class="product-price">
+                    <span class="original">R$ 2.497</span>
+                    R$ 1.997
+                </div>
+                <a href="#comprar" class="product-btn">Garantir Agora</a>
+            </div>
+
+            <!-- Produto 2 -->
+            <div class="product-card fade-in">
+                <div class="product-icon">◇</div>
+                <h3 class="product-name">Edição Limitada</h3>
+                <p class="product-desc">
+                    Produzida em séries numeradas. Quando acaba, não tem volta. Para colecionadores e apreciadores de exclusividade.
+                </p>
+                <div class="product-price">
+                    R$ 3.497
+                </div>
+                <a href="#comprar" class="product-btn">Garantir Agora</a>
+            </div>
+
+            <!-- Produto 3 -->
+            <div class="product-card fade-in">
+                <div class="product-icon">◈</div>
+                <h3 class="product-name">Pacote Premium</h3>
+                <p class="product-desc">
+                    O conjunto completo para quem quer a experiência full. Inclui todos os itens + brinde exclusivo + frete expresso.
+                </p>
+                <div class="product-price">
+                    <span class="original">R$ 5.997</span>
+                    R$ 4.797
+                </div>
+                <a href="#comprar" class="product-btn">Garantir Agora</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURES SECTION -->
+    <section class="features-section" id="diferenciais">
+        <div class="section-header fade-in">
+            <p class="section-label">◆ Diferenciais ◆</p>
+            <h2 class="section-title">Por Que Nandalin?</h2>
+        </div>
+        <div class="features-grid">
+            <div class="feature fade-in">
+                <div class="feature-icon">✦</div>
+                <h3 class="feature-title">Qualidade Premium</h3>
+                <p class="feature-desc">Cada peça passa por rigoroso controle de qualidade antes de chegar até você.</p>
+            </div>
+            <div class="feature fade-in">
+                <div class="feature-icon">◈</div>
+                <h3 class="feature-title">Edições Limitadas</h3>
+                <p class="feature-desc">Produzimos em pequenas séries para garantir exclusividade a nossos clientes.</p>
+            </div>
+            <div class="feature fade-in">
+                <div class="feature-icon">◇</div>
+                <h3 class="feature-title">Frete Premium</h3>
+                <p class="feature-desc">Embalagem especial, rastreamento em tempo real e entrega expressa garantida.</p>
+            </div>
+            <div class="feature fade-in">
+                <div class="feature-icon">✦</div>
+                <h3 class="feature-title">Garantia Total</h3>
+                <p class="feature-desc">30 dias de garantia incondicional. Se não amar, devolvemos seu investimento.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="testimonials-section" id="depoimentos">
+        <div class="section-header fade-in">
+            <p class="section-label">◆ Depoimentos ◆</p>
+            <h2 class="section-title">O Que Dizem Nossos Clientes</h2>
+        </div>
+        <div class="testimonials-grid">
+            <div class="testimonial fade-in">
+                <p class="testimonial-text">
+                    "Nunca imaginei que um produto pudesse fazer tanta diferença. A qualidade é absurda. Não consigo mais olhar pra nada inferior."
+                </p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">RS</div>
+                    <div>
+                        <div class="testimonial-name">Ricardo S.</div>
+                        <div class="testimonial-role">Empresário, São Paulo</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial fade-in">
+                <p class="testimonial-text">
+                    "Presenteei meu marido e ele ficou impressionado. A embalagem, o produto, tudo impecável. Comprei outro pra mim no mesmo dia."
+                </p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">AF</div>
+                    <div>
+                        <div class="testimonial-name">Ana F.</div>
+                        <div class="testimonial-role">Advogada, Rio de Janeiro</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial fade-in">
+                <p class="testimonial-text">
+                    "Já sou cliente há 2 anos. Cada lançamento é melhor que o anterior. Isso sim é entender o que o cliente merece."
+                </p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">MC</div>
+                    <div>
+                        <div class="testimonial-name">Marcos C.</div>
+                        <div class="testimonial-role">Diretor Financeiro, BH</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA SECTION -->
+    <section class="cta-section" id="comprar">
+        <div class="fade-in">
+            <div class="section-label">◆ Última Chance ◆</div>
+            <h2 class="cta-title">Garanta o Seu Agora</h2>
+            <p class="cta-desc">
+                Edição limitada. Quando acabar, não terá reposição. Quem decide rápido, garante.
+            </p>
+            <div class="cta-buttons">
+                <a href="https://drive.google.com/drive/folders/1f2xZSV4YjFIrYHw8I89NNUcS6GpO0V_e" class="cta-btn cta-btn-primary">
+                    Comprar Agora →
+                </a>
+                <a href="https://wa.me/SEUNUMERO" class="cta-btn cta-btn-secondary" target="_blank">
+                    Falar no WhatsApp
+                </a>
+            </div>
+            <p style="margin-top: 2rem; color: var(--gray); font-size: 0.85rem;">
+                🔒 Pagamento 100% seguro &nbsp;|&nbsp; 🚚 Frete premium incluso &nbsp;|&nbsp; ✅ Garantia de 30 dias
+            </p>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">NANDALIN</div>
+            <ul class="footer-links">
+                <li><a href="#produtos">Produtos</a></li>
+                <li><a href="#videos">Vídeos</a></li>
+                <li><a href="#diferenciais">Diferenciais</a></li>
+                <li><a href="#depoimentos">Clientes</a></li>
+            </ul>
+        </div>
+        <div class="footer-copy">
+            <p>© 2026 Nandalin. Todos os direitos reservados. Qualidade que se vê. Excelência que se sente.</p>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        // ========================================
+        // NAVBAR SCROLL EFFECT
+        // ========================================
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // ========================================
+        // VIDEO PLAY BUTTON
+        // ========================================
+        const videoOverlay = document.getElementById('videoOverlay');
+        const mainVideo = document.getElementById('mainVideo');
+
+        if (videoOverlay && mainVideo) {
+            videoOverlay.addEventListener('click', () => {
+                videoOverlay.style.display = 'none';
+                mainVideo.style.display = 'block';
+                mainVideo.play();
+            });
+        }
+
+        // ========================================
+        // SCROLL ANIMATIONS
+        // ========================================
+        const fadeElements = document.querySelectorAll('.fade-in');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+
+        fadeElements.forEach(el => observer.observe(el));
+
+        // ========================================
+        // SMOOTH SCROLL
+        // ========================================
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // ========================================
+        // MOBILE MENU (simple toggle)
+        // ========================================
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.querySelector('.nav-links');
+
+        if (menuToggle) {
+            menuToggle.addEventListener('click', () => {
+                navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+                navLinks.style.flexDirection = 'column';
+                navLinks.style.position = 'absolute';
+                navLinks.style.top = '100%';
+                navLinks.style.left = '0';
+                navLinks.style.right = '0';
+                navLinks.style.background = 'rgba(10,10,10,0.98)';
+                navLinks.style.padding = '2rem';
+                navLinks.style.gap = '1.5rem';
+            });
+        }
+    </script>
+
+</body>
+</html>
+

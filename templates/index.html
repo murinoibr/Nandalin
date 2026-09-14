@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NANDALIN PRO — Melhoria de Vídeo com IA</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <!-- HEADER -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <span class="logo-icon">🎬</span>
+                <span class="logo-text">NANDALIN <span class="logo-pro">PRO</span></span>
+            </div>
+            <div class="header-status" id="healthStatus">
+                <span class="status-dot"></span>
+                <span>Verificando...</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="main">
+        <!-- STEP 1: UPLOAD -->
+        <section class="step-section" id="stepUpload">
+            <div class="step-header">
+                <span class="step-number">1</span>
+                <h2>Carregar Vídeo</h2>
+                <p class="step-desc">Arraste ou selecione o vídeo para processar</p>
+            </div>
+            <div class="upload-zone" id="uploadZone">
+                <div class="upload-icon">📁</div>
+                <div class="upload-text">
+                    <strong>Arraste o vídeo aqui</strong><br>
+                    <span>ou clique para selecionar</span>
+                </div>
+                <div class="upload-formats">MP4, AVI, MOV, MKV, WebM — até 4GB</div>
+                <input type="file" id="fileInput" accept="video/*" hidden>
+            </div>
+            <div class="upload-progress" id="uploadProgress" style="display:none">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="uploadProgressFill"></div>
+                </div>
+                <span class="progress-text" id="uploadProgressText">Enviando...</span>
+            </div>
+        </section>
+
+        <!-- STEP 2: VIDEO INFO + ANALYSIS -->
+        <section class="step-section" id="stepInfo" style="display:none">
+            <div class="step-header">
+                <span class="step-number">2</span>
+                <h2>Análise Inteligente</h2>
+                <p class="step-desc">IA analisa qualidade, cenas e recomenda melhorias</p>
+            </div>
+
+            <!-- Video Preview -->
+            <div class="video-preview-container" id="videoPreviewContainer" style="display:none">
+                <video id="videoPreview" controls></video>
+                <div class="video-info-overlay" id="videoInfoOverlay"></div>
+            </div>
+
+            <!-- Botão Analisar -->
+            <div class="analyze-section" id="analyzeSection">
+                <button class="btn btn-primary btn-lg" id="btnAnalyze" onclick="startAnalysis()">
+                    🧠 Analisar com IA
+                </button>
+            </div>
+
+            <!-- Resultado da Análise -->
+            <div class="analysis-results" id="analysisResults" style="display:none">
+                <!-- Cards de Qualidade -->
+                <div class="analysis-grid" id="qualityCards"></div>
+
+                <!-- Recomendações -->
+                <div class="recommendations" id="recommendations"></div>
+
+                <!-- Melhores Momentos -->
+                <div class="best-moments" id="bestMoments" style="display:none">
+                    <h3>🏆 Melhores Momentos</h3>
+                    <div class="moments-list" id="momentsList"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- STEP 3: CONFIGURAÇÃO -->
+        <section class="step-section" id="stepConfig" style="display:none">
+            <div class="step-header">
+                <span class="step-number">3</span>
+                <h2>Configurar Processamento</h2>
+                <p class="step-desc">Escolha preset ou configure manualmente</p>
+            </div>
+
+            <!-- Presets -->
+            <div class="presets-section">
+                <h3>⚡ Presets Rápidos</h3>
+                <div class="presets-grid" id="presetsGrid"></div>
+            </div>
+
+            <!-- Configuração Manual -->
+            <div class="config-panel" id="configPanel">
+                <div class="config-grid">
+                    <!-- RESOLUÇÃO E MODO -->
+                    <div class="config-group">
+                        <h4>📐 Resolução & Modo</h4>
+                        <div class="config-row">
+                            <label>Resolução Alvo</label>
+                            <select id="cfgResolucao">
+                                <option value="2k">2K (2560×1440)</option>
+                                <option value="4k" selected>4K (3840×2160)</option>
+                                <option value="8k">8K (7680×4320)</option>
+                            </select>
+                        </div>
+                        <div class="config-row">
+                            <label>Modo de Saída</label>
+                            <select id="cfgModo">
+                                <option value="original" selected>Original (mantém ratio)</option>
+                                <option value="story">Story 9:16</option>
+                            </select>
+                        </div>
+                        <div class="config-row">
+                            <label>Codec</label>
+                            <select id="cfgCodec">
+                                <option value="libx265" selected>HEVC (libx265) — Melhor qualidade</option>
+                                <option value="libx264">AVC (libx264) — Maior compatibilidade</option>
+                            </select>
+                        </div>
+                        <div class="config-row">
+                            <label>Qualidade (CRF)</label>
+                            <div class="range-group">
+                                <input type="range" id="cfgCrf" min="0" max="51" value="18">
+                                <span class="range-value" id="cfgCrfVal">18</span>
+                            </div>
+                            <small>Menor = melhor qualidade (15 = quase lossless)</small>
+                        </div>
+                        <div class="config-row">
+                            <label>FPS</label>
+                            <select id="cfgFps">
+                                <option value="24">24 FPS (cinema)</option>
+                                <option value="30">30 FPS (padrão)</option>
+                                <option value="60" selected>60 FPS (premium)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- COR E TONS -->
+                    <div class="config-group">
+                        <h4>🎨 Cor & Tons</h4>
+                        <div class="config-row">
+                            <label>Brilho</label>
+                            <div class="range-group">
+                                <input type="range" id="cfgBrightness" min="-50" max="50" value="3">
+                                <span class="range-value" id="cfgBrightnessVal">+3%</span>
+                            </div>
+                        </div>
+                        <div class="config-row">
+                            <label>Contraste</label>
+                            <div class="range-group">
+                                <input type="range" id="cfgContrast" min="100" max="200" value="125">
+                                <span class="range-value" id="cfgContrastVal">+25%</span>
+                            </div>
+                        </div>
+                        <div class="config-row">
+                            <label>Saturação</label>
+                            <div class="range-group">
+                                <input type="range" id="cfgSaturation" min="100" max="300" value="150">
+                                <span class="range-value" id="cfgSaturationVal">+50%</span>
+                            </div>
+                        </div>
+                        <div class="config-row">
+                            <label>Gamma</label>
+                            <div class="range-group">
+                                <input type="range" id="cfgGamma" min="50" max="150" value="95">
+                                <span class="range-value" id="cfgGammaVal">0.95</span>
+                            </div>
+                        </div>
+                        <div class="config-row">
+                            <label>Temperatura (K)</label>
+                            <div class="range-group">
+                                <input type="range" id="cfgTemperature" min="2000" max="10000" value="5500" step="100">
+                                <span class="range-value" id="cfgTemperatureVal">5500K</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- QUALIDADE -->
+                    <div class="config-group">
+                        <h4>✨ Filtros de Qualidade</h4>
+                        <div class="config-row">
+                            <label class="toggle-label">
+                                <input type="checkbox" id="cfgDenoise" checked>
+                                <span class="toggle"></span>
+                                Redução de Ruído
+                            </label>
+                        </div>
+                        <div class="config-row">
+                            <label>Força Denoise</label>
+                            <div class="range-group">
+                                <input type="range" id="cfgDenoiseForce" min="1" max="7" value="4">
+                                <span class="range-value" id="cfgDenoiseForceVal">4</span>
+                            </div>
+                        </div>
+                        <div class="config-row">
+                            <label class="toggle-label">
+                                <input type="checkbox" id="cfgSharpen" checked>
+                                <span class="toggle"></span>
+                                Nitidez Cinematográfica
+                            </label>
+                        </div>
+                        <div class="config-row">
+                            <label class="toggle-label">
+                                <input type="checkbox" id="cfgSharpenPost" checked>
+                                <span class="toggle"></span>
+                                Nitidez Pós-Upscale
+                            </label>
+                        </div>
+                        <div class="config-row">
+                            <label class="toggle-label">
+                                <input type="checkbox" id="cfgColorBalance" checked>
+                                <span class="toggle"></span>
+                                Balanceamento de Cores
+                            </label>
+                        </div>
+                        <div class="config-row">
+                            <label class="toggle-label">
+                                <input type="checkbox" id="cfgVignette">
+                                <span class="toggle"></span>
+                                Efeito Vinheta
+                            </label>
+                        </div>
+                        <div class="config-row">
+                            <label>Curvas</label>
+                            <select id="cfgCurves">
+                                <option value="none">Nenhuma</option>
+                                <option value="cross_process" selected>Cross Process (cinematográfico)</option>
+                                <option value="vintage">Vintage</option>
+                                <option value="strong_contrast">Alto Contraste</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- STEP 4: PROCESSAR -->
+        <section class="step-section" id="stepProcess" style="display:none">
+            <div class="step-header">
+                <span class="step-number">4</span>
+                <h2>Processar Vídeo</h2>
+                <p class="step-desc">Revise a configuração e inicie o processamento</p>
+            </div>
+
+            <!-- Resumo da Config -->
+            <div class="summary-panel" id="summaryPanel"></div>
+
+            <!-- Botão Processar -->
+            <div class="process-actions" id="processActions">
+                <button class="btn btn-primary btn-xl" id="btnProcess" onclick="startProcessing()">
+                    🚀 Iniciar Processamento
+                </button>
+            </div>
+
+            <!-- Progresso -->
+            <div class="processing-status" id="processingStatus" style="display:none">
+                <div class="status-card">
+                    <div class="status-animation">
+                        <div class="spinner"></div>
+                    </div>
+                    <h3 id="processTitle">Processando...</h3>
+                    <p id="processMessage">Aguarde, o processamento pode levar vários minutos.</p>
+                    <div class="progress-bar large">
+                        <div class="progress-fill" id="processProgressFill"></div>
+                    </div>
+                    <span class="progress-text" id="processProgressText">0%</span>
+                </div>
+            </div>
+
+            <!-- Resultado -->
+            <div class="result-panel" id="resultPanel" style="display:none">
+                <div class="result-card success">
+                    <div class="result-icon">✅</div>
+                    <h3>Vídeo Processado com Sucesso!</h3>
+                    <div class="result-details" id="resultDetails"></div>
+                    <div class="result-actions">
+                        <a class="btn btn-primary btn-lg" id="btnDownload" href="#" download>
+                            📥 Baixar Vídeo Processado
+                        </a>
+                        <button class="btn btn-secondary" onclick="resetAll()">
+                            🔄 Processar Outro Vídeo
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- TOAST NOTIFICATIONS -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>

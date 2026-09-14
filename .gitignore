@@ -1,0 +1,29 @@
+# 🎬 NANDALIN — Git Ignore
+
+# Pastas de vídeo geradas/baixadas
+videos_originais/*
+videos_stories_8k/*
+videos_processados_8k/*
+saidas_ia/*
+temp_ia/*
+!videos_originais/.gitkeep
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.venv/
+venv/
+
+# Ambiente
+.env
+*.env.local
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# Ide
+.vscode/
+.idea/
